@@ -1,0 +1,11 @@
+.fondo{
+    background-color: #000;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.slogan{
+    font-size: 10rem;
+    text-align: center;
+    text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.6);
+}
