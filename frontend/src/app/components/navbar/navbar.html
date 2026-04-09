@@ -12,8 +12,18 @@
         </div>
 
     </div>
-
-    <button class="btnInicioSesion">INICIAR SESION</button>
+    <span *ngIf="Usuario" class="text-white me-2">{{ Usuario.nombre }}</span>
+    <button class="btnInicioSesion" (click)="Usuario ? logOut() : logIn()">
+        {{ textoBoton }}
+    </button>
+    <div class="overlay" *ngIf="iniciarSesion">
+        <div class="login-card p-4 text-center">
+            <h4>Iniciar Sesion</h4>
+            <input type="text" [(ngModel)]="nombre" placeholder="Nombre" class="form-control mb-3">
+            <p *ngIf="error" class="text-danger mt-1">{{ error }}</p>
+            <button class="boton-azul" (click)="guardarSesion()">Entrar</button>
+        </div>
+    </div>
 </nav>
 
 <ng-content></ng-content>
