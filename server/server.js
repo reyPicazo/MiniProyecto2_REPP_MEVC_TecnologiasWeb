@@ -10,7 +10,7 @@ app.use(cors({
         'http://localhost:4200'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-user']
 }));
 app.use(express.json());
 
@@ -22,6 +22,8 @@ app.use("/img", express.static("public/img"));
 const healthcheckRoute=require("./routes/healthcheck.route");
 app.use("/", healthcheckRoute);
 
+const productosRoute=require("./routes/productos.route");
+app.use("/productos", productosRoute);
 
 
 
