@@ -17,8 +17,24 @@ export class ProductoCard {
   @Output()alComprar=new EventEmitter<any>();
 
   constructor(private router: Router) { }
+
+  usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+
   agregarCarrito(){
-    this.alAgregarCarrito.emit(this.producto);
+    if(!this.usuario.nombre){
+      alert('Debes iniciar sesión para agregar productos al carrito.');
+    } else {
+      const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+      const productoExistente = carrito.find((item: any) => item.productoid === this.producto.id);
+      if(productoExistente){
+        productoExistente.cantidad++;
+      }
+      else{
+        carrito.push({ productoid: this.producto.id, cantidad: 1 });
+      }
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      alert(`Producto ${this.producto.nombre} agregado al carrito!`);
+    }
   }
 
   comprar(){

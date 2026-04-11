@@ -1,0 +1,37 @@
+<app-navbar />
+
+<div class="carrito-container">
+
+  <h2 class="carrito-titulo">Mi Carrito</h2>
+
+  <div *ngIf="productosCarrito.length === 0" class="carrito-vacio">
+    <p>Tu carrito está vacío.</p>
+  </div>
+
+  <div class="carrito-lista" *ngIf="productosCarrito.length > 0">
+
+    <div *ngFor="let item of productosCarrito; let i = index" class="carrito-item">
+      <img [src]="'http://127.0.0.1:3000/img/' + item.producto.imagen" [alt]="item.producto.nombre" class="carrito-img">
+
+
+      <div class="carrito-info">
+        <h5 class="carrito-nombre">{{ item.producto.nombre }}</h5>
+        <p class="carrito-precio">{{ item.producto.precio | currency:'MXN' }}</p>
+      </div>
+
+      <div class="carrito-cantidad">
+        <button class="btn-cantidad" (click)="bajarCantidad(i)">−</button>
+        <span class="cantidad-num">{{ item.cantidad }}</span>
+        <button class="btn-cantidad" (click)="agregarCantidad(i)">+</button>
+      </div>
+
+      <p class="carrito-subtotal">{{ item.producto.precio * item.cantidad | currency:'MXN' }}</p>
+    </div>
+
+    <div class="carrito-total">
+      <h4>Total: {{ getTotal() | currency:'MXN' }}</h4>
+      <button class="btn-finalizar">Finalizar compra</button>
+    </div>
+
+  </div>
+</div>
