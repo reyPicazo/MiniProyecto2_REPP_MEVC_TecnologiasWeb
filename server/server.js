@@ -14,8 +14,10 @@ app.use(cors({
 }));
 app.use(express.json());
 
+const path = require("path");
 
-app.use("/img", express.static("public/img"));
+app.use("/img", express.static(path.join(__dirname, "assets/img/productos")));
+
 
 //Importación de rutas//
 

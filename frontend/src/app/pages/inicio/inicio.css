@@ -2,6 +2,7 @@
     background-color: #000;
     color: #fff;
     font-family: 'Bebas Neue', sans-serif;
+    min-height: 60vh;
 }
 
 .slogan{
@@ -11,6 +12,7 @@
 }
 
 .heroProductos {
+  
   background-color: #000;
   padding: 60px 40px;
   display: flex;
