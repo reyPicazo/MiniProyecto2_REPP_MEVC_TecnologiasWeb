@@ -18,10 +18,11 @@ export class ProductoCard {
 
   constructor(private router: Router) { }
 
-  usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+  
 
   agregarCarrito(){
-    if(!this.usuario.nombre){
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    if(!usuario.nombre){
       alert('Debes iniciar sesión para agregar productos al carrito.');
     } else {
       const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
