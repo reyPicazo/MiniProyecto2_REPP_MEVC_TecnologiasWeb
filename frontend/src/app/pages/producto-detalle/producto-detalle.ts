@@ -15,6 +15,7 @@ import { DecimalPipe, CurrencyPipe, NgIf } from '@angular/common';
 export class ProductoDetalle {
   producto!:Producto;
   precio:number=0;
+  usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
 
   constructor(private route: ActivatedRoute, private productosService: Productos, private cdr: ChangeDetectorRef) {}
 
@@ -25,5 +26,23 @@ export class ProductoDetalle {
       this.producto = producto;
       this.cdr.detectChanges();
     });
+  }
+
+  agregarCarrito(){
+
+    if(!this.usuario.nombre){
+      alert('Debes iniciar sesión para agregar productos al carrito.');
+    } else {
+      const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+      const productoExistente = carrito.find((item: any) => item.productoid === this.producto.id);
+      if(productoExistente){
+        productoExistente.cantidad++;
+      }
+      else{
+        carrito.push({ productoid: this.producto.id, cantidad: 1 });
+      }
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      alert(`Producto ${this.producto.nombre} agregado al carrito!`);
+    }
   }
 }

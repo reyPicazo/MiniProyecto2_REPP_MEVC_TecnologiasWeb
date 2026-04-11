@@ -14,11 +14,10 @@
         <p class="detalle-descripcion">{{ producto.descripcion }}</p>
         <span class="detalle-disponibilidad" [class.disponible]="producto.disponibilidad" [class.no-disponible]="!producto.disponibilidad">
         {{ producto.disponibilidad ? 'Disponible' : 'No disponible' }}
-        </span>
+        </span> 
 
         <div class="detalle-botones">
-            <button [disabled]="!producto.disponibilidad">Agregar al Carrito</button>
-            <button [disabled]="!producto.disponibilidad">Comprar Ahora</button>
+            <button [disabled]="!producto.disponibilidad" (click)="agregarCarrito()">Agregar al Carrito</button>
         </div>
     </div>
 </div>
