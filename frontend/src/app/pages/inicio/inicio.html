@@ -4,3 +4,10 @@
     <h1 class="slogan">EL RINCON DONDE <br> LOS SUEÑOS SE <br> HACEN REALIDAD</h1>
 
 </div>
+
+<div class="heroProductos">
+    <app-producto-card *ngFor="let producto of productos" [producto]="producto" 
+    (alAgregarCarrito)="onAgregarCarrito($event)" 
+    (alComprar)="onComprar($event)">    
+    </app-producto-card>
+</div>
