@@ -27,7 +27,8 @@ app.use("/", healthcheckRoute);
 const productosRoute=require("./routes/productos.route");
 app.use("/productos", productosRoute);
 
-
+const mensajesRoute=require("./routes/mensajes.route");
+app.use("/mensajes", mensajesRoute);
 
 
 app.listen(PORT, "0.0.0.0", () => {
