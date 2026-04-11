@@ -1,61 +1,30 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {of}from 'rxjs';
+  import { Injectable } from '@angular/core';
+  import { HttpClient } from '@angular/common/http';
+  import {of}from 'rxjs';
+import { Producto } from '../models/producto';
 
 
 
-@Injectable({
-  providedIn: 'root',
-})
-export class Productos {
-  private apiUrl='http://localhost:3000/api/productos'
+  @Injectable({
+    providedIn: 'root',
+  })
+  export class Productos {
+    private apiUrl='http://localhost:3000/productos'
 
-  private productoProvicion=[
-    {
-      id: 1,
-      nombre: 'tupulainas',
-      categoria: 'tupulainas',
-      marca: 'tupulainas',
-      precio: 15000,
-      stock: 10,
-      imagen: '1.jpg',
-      descripcion: 'tupulainas',
-      disponibilidad: true
-    },
-    {
-      id: 2,
-      nombre: 'tupulainas',
-      categoria: 'tupulainas',
-      marca: 'tupulainas',
-      precio: 350,
-      stock: 25,
-      imagen: '1.jpg',
-      descripcion: 'tupulainas',
-      disponibilidad: true
-    },
-    {
-      id: 3,
-      nombre: 'tupulainas',
-      categoria: 'tupulainas',
-      marca: 'tupulainas',
-      precio: 1200,
-      stock: 0,
-      imagen: '1.jpg',
-      descripcion: 'tupulainas',
-      disponibilidad: false
+    
+
+    constructor(private http: HttpClient) { }
+
+    
+
+    //Cuando la api funcione se cambiará a:
+    getProductos(){
+      return this.http.get<any[]>(this.apiUrl)
     }
-  ];
 
-  constructor(private http: HttpClient) { }
+    
 
-  getProductos(){
-    return of(this.productoProvicion)
+    getById(id:number){
+      return this.http.get<Producto>(`${this.apiUrl}/${id}`);
+    }
   }
-
-  /*Cuando la api funcione se cambiará a:
-  getproductos(){
-    return this.http.get<any[]>(this.apiUrl)
-  }
-
-  */
-}

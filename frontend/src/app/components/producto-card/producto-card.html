@@ -1,11 +1,15 @@
 <div class="card-producto">
-    <img [src]="'/imagenes/' + producto.imagen" [alt]="producto.nombre">
+    
     <div class="card-info">
+        <img [src]="'http://127.0.0.1:3000/img/' + producto.imagen">
+        
         <h3>{{ producto.nombre }}</h3>
         <p>{{producto.precio | currency:'USD'}}</p>
     </div>
     <div class="card-botones">
         <button [disabled]="!producto.disponibilidad" (click)="agregarCarrito()">{{producto.disponibilidad ? 'Agregar al Carrito' : 'No Disponible'}}</button>
         <button [disabled]="!producto.disponibilidad" (click)="comprar()">Comprar</button>
+        <button (click)="verDetalle()">más...</button>
     </div>
+    
 </div>
