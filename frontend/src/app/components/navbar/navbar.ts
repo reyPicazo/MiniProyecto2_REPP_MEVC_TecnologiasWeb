@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from '../../services/usuario';
 import { Router } from '@angular/router';
+import { Admin } from '../../models/admin';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
-
+  admin: Admin | undefined;
   Usuario: UsuarioModel | undefined;
   nombre: string='';
   id:number=0;
@@ -30,6 +31,8 @@ export class Navbar implements OnInit {
     if (stored) {
       this.Usuario = JSON.parse(stored);
       this.textBoton="Cerrar Sesion";
+      
+      
     }
   }
 
@@ -50,6 +53,9 @@ export class Navbar implements OnInit {
       console.log('Usuario guardado:', this.Usuario);
       console.log('Texto botón:', this.textBoton);
       
+      if(this.Usuario?.nombre==="admin" || this.Usuario?.nombre==="Admin" || this.Usuario?.nombre==="ADMIN"){
+        this.loadAdmin();
+      }
       this.changeDetectorRef.detectChanges();
       
     }else{
@@ -77,7 +83,17 @@ export class Navbar implements OnInit {
     this.router.navigate(['/inicio']);
 
   }
+
+  loadAdmin(){
+    this.router.navigate(['/admin']);
+  }
   
+  get esAdmin(): boolean {
+    return this.Usuario?.nombre === 'admin';
+  }
+
+  
+
   
 
   
