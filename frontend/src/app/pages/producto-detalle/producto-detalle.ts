@@ -3,12 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Productos } from '../../services/productos';
 import { Navbar } from '../../components/navbar/navbar';
 import { Producto } from '../../models/producto';
-import { DecimalPipe, CurrencyPipe, NgIf } from '@angular/common';   
+import { DecimalPipe, NgIf } from '@angular/common';   
 
 @Component({
   selector: 'app-producto-detalle',
   standalone:true,
-  imports: [Navbar, DecimalPipe, CurrencyPipe, NgIf],
+  imports: [Navbar, DecimalPipe, NgIf],
   templateUrl: './producto-detalle.html',
   styleUrl: './producto-detalle.css',
 })

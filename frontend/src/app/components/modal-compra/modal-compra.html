@@ -1,0 +1,57 @@
+<div class="modal-overlay" (click)="cerrarModal()">
+  <div class="modal-contenido" (click)="$event.stopPropagation()">
+    <form (ngSubmit)="comprar()">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Comprar</h5>
+        <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Todas nuestras compras son seguras (De chucky no nos hacemos cargo)</p>
+      </div>
+
+      <div class="preguntas mb-3">
+
+        <label for="banco" class="form-label">Elige tu banco</label>
+        <select class="form-select" id="banco" [(ngModel)]="banco" name="banco" required>
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="bbva">BBVA</option>
+            <option value="santander">Santander</option>
+            <option value="caixa">CaixaBank</option>
+            <option value="nu">Nubank</option>
+            <option value="mercadoPago">MercadoPago</option>
+        </select>
+
+        <label for="tarjeta" class="form-label mt-2">Número de tarjeta</label>
+        <input type="text" class="form-control" id="tarjeta"
+            [(ngModel)]="tarjeta" name="tarjeta"
+            placeholder="1234567890123456"
+            maxlength="16"
+            required>
+
+        <label for="vencimiento" class="form-label mt-2">Fecha de vencimiento</label>
+        <input type="text" class="form-control" id="vencimiento" 
+            placeholder="MM/AA" 
+            [(ngModel)]="vencimiento" 
+            name="vencimiento"
+            maxlength="4"
+            required>
+
+        <label for="cvv" class="form-label mt-2">CVV</label>
+        <input type="text" class="form-control" id="cvv"
+            [(ngModel)]="cvv" name="cvv"
+            placeholder="123"
+            maxlength="3"
+            required>
+
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Comprar</button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,9 +1,18 @@
 const express=require('express');
 const cors=require('cors');
+//const mysql=require('mysql2');
 require('dotenv').config();
 
 const app =express();
 const PORT=process.env.PORT || 3000;
+
+// Configuración de la conexión a la base de datos
+/*const db = mysql.createConnection({
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE
+});*/
 
 app.use(cors({
     origin:[
@@ -26,6 +35,9 @@ app.use("/", healthcheckRoute);
 
 const productosRoute=require("./routes/productos.route");
 app.use("/productos", productosRoute);
+
+const compraRoute=require("./routes/compra.route");
+app.use("/compra", compraRoute);
 
 
 

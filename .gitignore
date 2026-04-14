@@ -63,3 +63,7 @@ Thumbs.db
 /frontend/tmp
 /frontend/out-tsc
 /frontend/bazel-out
+
+
+#Variables de entorno
+/.env
