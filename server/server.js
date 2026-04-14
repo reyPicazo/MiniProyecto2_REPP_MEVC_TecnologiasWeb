@@ -40,6 +40,8 @@ const compraRoute=require("./routes/compra.route");
 app.use("/compra", compraRoute);
 
 
+const mensajesRoute=require("./routes/mensajes.route");
+app.use("/mensajes", mensajesRoute);
 
 
 app.listen(PORT, "0.0.0.0", () => {

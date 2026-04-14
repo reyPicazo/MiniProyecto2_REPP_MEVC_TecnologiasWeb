@@ -13,6 +13,7 @@ import { ModalCompra } from '../../components/modal-compra/modal-compra';
 })
 export class Carrito implements OnInit{
   productosCarrito: { producto: any, cantidad: number }[] = [];
+  cantidad:number=0;
 
   constructor(private productosService: Productos, private cdr: ChangeDetectorRef) {}
   
@@ -29,7 +30,9 @@ export class Carrito implements OnInit{
 
   agregarCantidad(index: number){
     this.productosCarrito[index].cantidad++;
+    this.cantidad=this.productosCarrito[index].cantidad;
     this.guardarCarrito();
+    
   }
 
   bajarCantidad(index: number) {
@@ -39,6 +42,7 @@ export class Carrito implements OnInit{
       this.productosCarrito.splice(index, 1);
     }
     this.guardarCarrito();
+    
   }
 
   guardarCarrito() {
