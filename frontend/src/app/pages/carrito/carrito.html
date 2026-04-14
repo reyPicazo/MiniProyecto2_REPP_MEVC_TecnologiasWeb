@@ -42,3 +42,10 @@
   (cerrar)="modalAbierto = false"
   (confirmar)="finalizarCompra()">
 </app-modal-compra>
+
+<app-alert
+  *ngIf="mostrarAlert"
+  [tipo]="tipoAlert"
+  [mensaje]="mensajeAlert"
+  (cerrar)="mostrarAlert = false">
+</app-alert>

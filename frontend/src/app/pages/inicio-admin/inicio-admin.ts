@@ -5,18 +5,29 @@ import {Productos}from '../../services/productos';
 import { Admin } from '../../models/admin';
 import { CommonModule } from '@angular/common';
 import { AdminCard } from '../../components/admin-card/admin-card';
+import { Alert } from '../../components/alert/alert';
 
 @Component({
   selector: 'app-inicio-admin',
   standalone:true,
-  imports: [Navbar, CommonModule, AdminCard, NgFor],
+  imports: [Navbar, CommonModule, AdminCard, NgFor, Alert],
   templateUrl: './inicio-admin.html',
   styleUrl: './inicio-admin.css',
 })
 export class InicioAdmin implements OnInit {
    productos: any[] = [];
 
+  mostrarAlert = false;
+  tipoAlert: 'success' | 'error' = 'success';
+  mensajeAlert = '';
+
   constructor(private productosService: Productos, private cdr: ChangeDetectorRef) {}
+
+  mostrarAlerta(tipo: 'success' | 'error', mensaje: string) {
+    this.tipoAlert = tipo;
+    this.mensajeAlert = mensaje;
+    this.mostrarAlert = true;
+  }
 
   ngOnInit(): void {
     this.productosService.getProductos().subscribe({
@@ -32,7 +43,6 @@ export class InicioAdmin implements OnInit {
   }
   onActualizar(producto: any) {
     console.log('Actualizar producto:', producto);
-    // aquí irá la lógica de actualizar después
   }
   
 

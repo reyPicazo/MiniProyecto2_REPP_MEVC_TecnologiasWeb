@@ -4,11 +4,12 @@ import { Productos } from '../../services/productos';
 import { Navbar } from '../../components/navbar/navbar';
 import { Producto } from '../../models/producto';
 import { DecimalPipe, NgIf } from '@angular/common';   
+import { Alert } from '../../components/alert/alert';
 
 @Component({
   selector: 'app-producto-detalle',
   standalone:true,
-  imports: [Navbar, DecimalPipe, NgIf],
+  imports: [Navbar, DecimalPipe, NgIf, Alert],
   templateUrl: './producto-detalle.html',
   styleUrl: './producto-detalle.css',
 })
@@ -17,8 +18,17 @@ export class ProductoDetalle {
   precio:number=0;
   usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
 
+  mostrarAlert = false;
+  tipoAlert: 'success' | 'error' = 'success';
+  mensajeAlert = '';
+
   constructor(private route: ActivatedRoute, private productosService: Productos, private cdr: ChangeDetectorRef) {}
 
+  mostrarAlerta(tipo: 'success' | 'error', mensaje: string) {
+    this.tipoAlert = tipo;
+    this.mensajeAlert = mensaje;
+    this.mostrarAlert = true;
+  }
 
   ngOnInit(){
     const id=this.route.snapshot.paramMap.get('id');
@@ -31,7 +41,7 @@ export class ProductoDetalle {
   agregarCarrito(){
 
     if(!this.usuario.nombre){
-      alert('Debes iniciar sesión para agregar productos al carrito.');
+      this.mostrarAlerta('error', 'Debes iniciar sesión para agregar productos al carrito.');
     } else {
       const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
       const productoExistente = carrito.find((item: any) => item.productoid === this.producto.id);
@@ -42,7 +52,7 @@ export class ProductoDetalle {
         carrito.push({ productoid: this.producto.id, cantidad: 1 });
       }
       localStorage.setItem('carrito', JSON.stringify(carrito));
-      alert(`Producto ${this.producto.nombre} agregado al carrito!`);
+      this.mostrarAlerta('success', `Producto ${this.producto.nombre} agregado al carrito.`);
     }
   }
 }

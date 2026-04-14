@@ -39,3 +39,10 @@
     </div>
     
 </div>
+
+<app-alert
+  *ngIf="mostrarAlert"
+  [tipo]="tipoAlert"
+  [mensaje]="mensajeAlert"
+  (cerrar)="mostrarAlert = false">
+</app-alert>

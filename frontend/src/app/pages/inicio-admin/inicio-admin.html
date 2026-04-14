@@ -12,3 +12,10 @@
     (alActualizar)="onActualizar($event)">
   </app-admin-card>
 </div>
+
+<app-alert
+  *ngIf="mostrarAlert"
+  [tipo]="tipoAlert"
+  [mensaje]="mensajeAlert"
+  (cerrar)="mostrarAlert = false">
+</app-alert>
