@@ -22,7 +22,7 @@
       <div class="carrito-cantidad">
         <button class="btn-cantidad" (click)="bajarCantidad(i)">−</button>
         <span class="cantidad-num">{{ item.cantidad }}</span>
-        <button class="btn-cantidad" (click)="agregarCantidad(i)">+</button>
+        <button class="btn-cantidad" (click)="agregarCantidad(i)" >+</button>
       </div>
 
       <p class="carrito-subtotal">{{ item.producto.precio * item.cantidad | currency:'MXN' }}</p>

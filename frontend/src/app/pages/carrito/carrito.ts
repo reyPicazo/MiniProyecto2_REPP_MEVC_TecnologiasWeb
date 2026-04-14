@@ -29,15 +29,24 @@ export class Carrito implements OnInit{
   }
 
   agregarCantidad(index: number){
-    this.productosCarrito[index].cantidad++;
-    this.cantidad=this.productosCarrito[index].cantidad;
+    const item = this.productosCarrito[index];
+
+    if (item.cantidad >= item.producto.stock) {
+      alert('Has agotado todo el stock disponible');
+      return;
+    }
+
+    item.cantidad++;
+
     this.guardarCarrito();
     
   }
 
   bajarCantidad(index: number) {
-    if (this.productosCarrito[index].cantidad > 1) {
-      this.productosCarrito[index].cantidad--;
+    const item = this.productosCarrito[index];
+    
+    if (item.cantidad > 1) {
+      item.cantidad--;
     } else {
       this.productosCarrito.splice(index, 1);
     }
