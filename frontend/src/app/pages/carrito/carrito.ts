@@ -3,11 +3,12 @@ import { Productos } from '../../services/productos';
 import { Navbar } from '../../components/navbar/navbar';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { ModalCompra } from '../../components/modal-compra/modal-compra';
+import { Alert } from "../../components/alert/alert";
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [Navbar, NgIf, NgFor, CurrencyPipe, ModalCompra],
+  imports: [Navbar, NgIf, NgFor, CurrencyPipe, ModalCompra, Alert],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })
@@ -15,7 +16,17 @@ export class Carrito implements OnInit{
   productosCarrito: { producto: any, cantidad: number }[] = [];
   cantidad:number=0;
 
+  mostrarAlert = false;
+  tipoAlert: 'success' | 'error' = 'success';
+  mensajeAlert = '';
+
   constructor(private productosService: Productos, private cdr: ChangeDetectorRef) {}
+
+  mostrarAlerta(tipo: 'success' | 'error', mensaje: string) {
+    this.tipoAlert = tipo;
+    this.mensajeAlert = mensaje;
+    this.mostrarAlert = true;
+  }
   
   ngOnInit(): void {
     const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
@@ -29,15 +40,23 @@ export class Carrito implements OnInit{
   }
 
   agregarCantidad(index: number){
-    this.productosCarrito[index].cantidad++;
-    this.cantidad=this.productosCarrito[index].cantidad;
+    const item = this.productosCarrito[index];
+
+    if (item.cantidad >= item.producto.stock) {
+      this.mostrarAlerta('error', 'Has agotado todo el stock disponible');
+      return;
+    }
+
+    item.cantidad++;
+
     this.guardarCarrito();
     
   }
 
   bajarCantidad(index: number) {
-    if (this.productosCarrito[index].cantidad > 1) {
-      this.productosCarrito[index].cantidad--;
+    const item = this.productosCarrito[index];
+    if (item.cantidad > 1) {
+      item.cantidad--;
     } else {
       this.productosCarrito.splice(index, 1);
     }
@@ -60,7 +79,7 @@ export class Carrito implements OnInit{
   modalAbierto = false;
 
   finalizarCompra() {
-    alert('Compra finalizada con éxito');
+    this.mostrarAlerta('success', 'Compra finalizada con éxito');
     this.modalAbierto = false;
     this.productosCarrito = [];
     localStorage.removeItem('carrito');

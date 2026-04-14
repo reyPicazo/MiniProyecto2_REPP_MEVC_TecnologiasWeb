@@ -5,11 +5,12 @@ import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { Alert } from '../../components/alert/alert';
 
 @Component({
   selector: 'app-actualizar-producto',
   standalone:true,
-  imports: [Navbar, CurrencyPipe, NgFor, NgIf, FormsModule],
+  imports: [Navbar, CurrencyPipe, NgFor, NgIf, FormsModule, Alert],
   templateUrl: './subir-producto.html',
   styleUrl: './subir-producto.css',
 })
@@ -19,8 +20,18 @@ export class SubirProducto implements OnInit{
   imagenFile: File | null= null;
   imagenPreview: string | null = null;
 
+  mostrarAlert = false;
+  tipoAlert: 'success' | 'error' = 'success';
+  mensajeAlert = '';
+
   constructor(private route: ActivatedRoute, private productosService: Productos, private cdr: ChangeDetectorRef, private router: Router){}
 
+  mostrarAlerta(tipo: 'success' | 'error', mensaje: string) {
+    this.tipoAlert = tipo;
+    this.mensajeAlert = mensaje;
+    this.mostrarAlert = true;
+  }
+  
   ngOnInit(): void {
     const id= this.route.snapshot.paramMap.get('id');
     if(id){
@@ -46,10 +57,10 @@ export class SubirProducto implements OnInit{
   subir(){
     this.productosService.addProducto(this.producto, this.imagenFile || undefined).subscribe({
       next:()=>{
-        alert('Producto subido correctamente');
+        this.mostrarAlerta('success', 'Producto subido exitosamente');
         this.router.navigate(['/admin']);
       },
-      error:()=> alert('Error al subir el producto')
+      error:()=> this.mostrarAlerta('error', 'Error al subir el producto')
     });
   }
 

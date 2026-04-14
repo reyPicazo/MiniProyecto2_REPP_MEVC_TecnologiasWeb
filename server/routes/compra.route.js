@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const validarCompra = require('../middleware/validar-compra.middleware');
+const { realizarCompra } = require('../controllers/compra.controller');
 
 
-router.post('/', validarCompra, (req,res) => {
-    res.json({ mensaje: 'La compra se realizo con exito'});
-});
+router.post('/', validarCompra, realizarCompra);
 
 module.exports = router;
