@@ -1,12 +1,12 @@
 import { Component,Input, Output, EventEmitter } from '@angular/core';
-import { CurrencyPipe, NgIf } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-producto-card',
   standalone:true,
-  imports: [CurrencyPipe, NgIf, CommonModule],
+  imports: [CurrencyPipe, CommonModule],
   templateUrl: './producto-card.html',
   styleUrl: './producto-card.css',
 })

@@ -30,8 +30,15 @@
 
     <div class="carrito-total">
       <h4>Total: {{ getTotal() | currency:'MXN' }}</h4>
-      <button class="btn-finalizar">Finalizar compra</button>
+      <button class="btn-finalizar" (click)="modalAbierto = true">Finalizar compra</button>
     </div>
 
   </div>
 </div>
+
+
+<app-modal-compra
+  *ngIf="modalAbierto"
+  (cerrar)="modalAbierto = false"
+  (confirmar)="finalizarCompra()">
+</app-modal-compra>

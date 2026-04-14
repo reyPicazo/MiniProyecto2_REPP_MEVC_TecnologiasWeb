@@ -2,11 +2,12 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { Productos } from '../../services/productos';
 import { Navbar } from '../../components/navbar/navbar';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { ModalCompra } from '../../components/modal-compra/modal-compra';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [Navbar, NgIf, NgFor, CurrencyPipe],
+  imports: [Navbar, NgIf, NgFor, CurrencyPipe, ModalCompra],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })
@@ -54,6 +55,15 @@ export class Carrito implements OnInit{
 
   getTotal() {
     return this.productosCarrito.reduce((total, item) => total + item.producto.precio * item.cantidad, 0);
+  }
+
+  modalAbierto = false;
+
+  finalizarCompra() {
+    alert('Compra finalizada con éxito');
+    this.modalAbierto = false;
+    this.productosCarrito = [];
+    localStorage.removeItem('carrito');
   }
 
 }
