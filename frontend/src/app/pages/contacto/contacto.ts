@@ -1,26 +1,32 @@
 import { Component } from '@angular/core';
 import { Navbar } from '../../components/navbar/navbar';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Mensajes } from '../../services/mensajes';
 import { Alert } from '../../components/alert/alert';
+import { NgIf, NgClass, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-contacto',
-  imports: [Navbar, FormsModule, Alert],
+  imports: [Navbar, ReactiveFormsModule, Alert, NgIf, NgClass, NgStyle],
   templateUrl: './contacto.html',
   styleUrl: './contacto.css',
 })
 export class Contacto {
-  nombre:string="";
-  email:string="";
-  mensaje:string="";
-  asunto:string="";
+  contactoForm!: FormGroup;
+  
 
   mostrarAlert = false;
   tipoAlert: 'success' | 'error' = 'success';
   mensajeAlert = '';
 
-  constructor(private mensajesService: Mensajes) {}
+  constructor(private mensajesService: Mensajes, private fb: FormBuilder) {
+    this.contactoForm=this.fb.group({
+      nombre:['', [Validators.required, Validators.minLength(2)]],
+      email:['', [Validators.required, Validators.email]],
+      asunto:['', [Validators.required]],
+      mensaje:['', [Validators.required]]
+    })
+  }
 
   mostrarAlerta(tipo: 'success' | 'error', mensaje: string) {
     this.tipoAlert = tipo;
@@ -32,18 +38,22 @@ export class Contacto {
     if(!usuario.nombre){
       this.mostrarAlerta('error', 'Debes iniciar sesión para enviar un mensaje.');
       return;
-    }else{
-      this.mensajesService.enviarMensaje(usuario.nombre, this.nombre, this.email, this.asunto, this.mensaje).subscribe({
-        next:() => {
-          this.mostrarAlerta('success', 'Mensaje enviado correctamente.');
-          this.nombre = '';
-          this.email = '';
-          this.asunto = '';
-          this.mensaje = '';
-        },
-        error: () => this.mostrarAlerta('error', 'Error al enviar el mensaje.')
-      })
-
     }
+
+    if(this.contactoForm.invalid){
+      this.mostrarAlerta('error', 'Por favor, completa todos los campos correctamente.');
+    }
+
+    this.mensajesService.enviarMensaje(this.contactoForm.value).subscribe({
+      next:()=>{
+        this.mostrarAlerta('success', 'Mensaje enviado correctamente.');
+        this.contactoForm.reset();
+      },
+      error:()=>{
+        this.mostrarAlerta('error', 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+      }
+    });
+
+    
   }
 }

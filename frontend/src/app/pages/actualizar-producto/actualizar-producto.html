@@ -53,6 +53,7 @@
 
 <app-alert
   *ngIf="mostrarAlert"
+  [ngClass]="{'alerta-exitosa': tipoAlert === 'success', 'alerta-error': tipoAlert === 'error'}"
   [tipo]="tipoAlert"
   [mensaje]="mensajeAlert"
   (cerrar)="mostrarAlert = false">
