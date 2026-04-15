@@ -18,9 +18,7 @@ const postMensajes=async (req, res) => {
         console.error("Error al enviar el mensaje:", error);
         return res.status(500).json({error: "Error interno del servidor"});
     }finally{
-        if(conn){
-            conn.release();
-        }
+        
     }
 }
 

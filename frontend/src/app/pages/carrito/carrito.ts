@@ -1,14 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { Productos } from '../../services/productos';
 import { Navbar } from '../../components/navbar/navbar';
-import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { CurrencyPipe, NgFor, NgIf, NgClass, NgStyle } from '@angular/common';
 import { ModalCompra } from '../../components/modal-compra/modal-compra';
 import { Alert } from "../../components/alert/alert";
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [Navbar, NgIf, NgFor, CurrencyPipe, ModalCompra, Alert],
+  imports: [Navbar, NgIf, NgFor, CurrencyPipe, ModalCompra, Alert, NgClass, NgStyle],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })

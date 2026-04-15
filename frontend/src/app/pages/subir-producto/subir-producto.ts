@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { Productos } from '../../services/productos';
 import { Navbar } from '../../components/navbar/navbar';
-import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { CurrencyPipe, NgFor, NgIf, NgClass, NgStyle } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Alert } from '../../components/alert/alert';
 @Component({
   selector: 'app-actualizar-producto',
   standalone:true,
-  imports: [Navbar, CurrencyPipe, NgFor, NgIf, FormsModule, Alert],
+  imports: [Navbar, CurrencyPipe, NgFor, NgIf, NgClass, NgStyle, FormsModule, Alert],
   templateUrl: './subir-producto.html',
   styleUrl: './subir-producto.css',
 })
