@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class Mensajes {
 
-  private apiURL='http://localhost:3000/mensajes'
+  private apiURL='https://rincon-de-los-tesoros-server.onrender.com/mensajes'
 
   constructor(private http: HttpClient) {}
 

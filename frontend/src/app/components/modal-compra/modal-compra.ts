@@ -46,7 +46,7 @@ export class ModalCompra {
       carrito: carrito
     };
 
-      this.http.post('http://localhost:3000/compra', datos).subscribe({
+      this.http.post('https://rincon-de-los-tesoros-server.onrender.com/compra', datos).subscribe({
         next:(res:any) =>{
           this.mostrarAlerta('success', 'Compra realizada con éxito');
           setTimeout(() => {

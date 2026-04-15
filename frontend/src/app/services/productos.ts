@@ -10,7 +10,7 @@ import { Producto } from '../models/producto';
   })
 
   export class Productos {
-    private apiUrl='http://localhost:3000/productos'
+    private apiUrl='https://rincon-de-los-tesoros-server.onrender.com/productos'
 
     
 
