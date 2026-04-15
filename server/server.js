@@ -44,6 +44,7 @@ const path = require("path");
 app.use("/img", express.static(path.join(__dirname, "assets/img/productos")));
 
 
+
 //Importación de rutas//
 
 const healthcheckRoute=require("./routes/healthcheck.route");

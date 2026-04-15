@@ -1,6 +1,6 @@
 <app-navbar />
 
-<div class="carrito-container">
+<div class="carrito-container">  
 
   <h2 class="carrito-titulo">Mi Carrito</h2>
 
@@ -11,7 +11,7 @@
   <div class="carrito-lista" *ngIf="productosCarrito.length > 0">
 
     <div *ngFor="let item of productosCarrito; let i = index" class="carrito-item">
-      <img [src]="'http://127.0.0.1:3000/img/' + item.producto.imagen" [alt]="item.producto.nombre" class="carrito-img">
+      <img [src]="'https://rincon-de-los-tesoros-server.onrender.com/img/' + item.producto.imagen" [alt]="item.producto.nombre" class="carrito-img">
 
 
       <div class="carrito-info">

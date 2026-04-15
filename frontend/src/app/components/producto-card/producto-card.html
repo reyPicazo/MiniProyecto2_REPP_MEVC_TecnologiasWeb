@@ -1,7 +1,7 @@
 <div class="card-producto">
     
     <div class="card-info">
-        <img [src]="'http://127.0.0.1:3000/img/' + producto.imagen">
+        <img [src]="'https://rincon-de-los-tesoros-server.onrender.com/img/' + producto.imagen">
         
         <h3>{{ producto.nombre }}</h3>
         <p>{{producto.precio | currency:'USD'}}</p>
@@ -20,3 +20,4 @@
   [mensaje]="mensajeAlert"
   (cerrar)="mostrarAlert = false">
 </app-alert>
+
