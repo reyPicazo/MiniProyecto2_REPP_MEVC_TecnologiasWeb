@@ -1,5 +1,5 @@
 const { uptime } = require('process');
-const db=require('../db/db');
+const db = require("../server");
 exports.getHealthStatus=async(_req, res)=>{
     const healthcheck={
         uptime:process.uptime(),
@@ -14,17 +14,15 @@ exports.getHealthStatus=async(_req, res)=>{
     };
 
     try{
-        let conn;
         try{
-            conn=await db.getConnection();
-            await conn.query('SELECT 1 AS result');
+            await db.query('SELECT 1 AS result');
             healthcheck.db={
                 message: 'OK',
                 status: 'up'
             };
 
         }finally{
-            if(conn && conn.release)conn.release();
+            if(db && db.release)db.release();
         }
         res.send(healthcheck);
     }catch(error){

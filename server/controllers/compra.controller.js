@@ -1,8 +1,6 @@
-const {getConnection} = require('../db/db');
-
+const db = require("../server");
 const realizarCompra = async (req, res) => {
     try {
-        const db = getConnection();
         const carritoAux = req.body.carrito;
 
         for (const item of carritoAux) {
