@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+
+<div class="detalle-container" *ngIf="producto">
+    <div class="detalle-imagen">
+        <img [src]="'http://localhost:3000/img/' + producto.imagen" [alt]="producto.nombre">
+
+    </div>
+
+    <div class="detalle-info">
+        <h1 class="detalle-nombre">{{ producto.nombre }}</h1>
+        <p class="detalle-marca">{{ producto.marca }}</p>
+        <p class="detalle-categoria">{{ producto.categoria }}</p>
+        <p class="detalle-precio">${{ producto.precio | number:'1.2-2' }}</p>
+        <p class="detalle-descripcion">{{ producto.descripcion }}</p>
+        <span class="detalle-disponibilidad" [class.disponible]="producto.disponibilidad" [class.no-disponible]="!producto.disponibilidad">
+        {{ producto.disponibilidad ? 'Disponible' : 'No disponible' }}
+        </span> 
+
+        <div class="detalle-botones">
+            <button [disabled]="!producto.disponibilidad" (click)="agregarCarrito()">Agregar al Carrito</button>
+        </div>
+    </div>
+</div>
+
+<app-alert
+  *ngIf="mostrarAlert"
+  [ngClass]="{'alerta-exitosa': tipoAlert === 'success', 'alerta-error': tipoAlert === 'error'}"
+  [tipo]="tipoAlert"
+  [mensaje]="mensajeAlert"
+  (cerrar)="mostrarAlert = false">
+</app-alert>

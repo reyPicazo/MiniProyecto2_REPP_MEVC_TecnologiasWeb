@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+
+
+<div class="actualizar-container">
+    <h2 class="actualizar-titulo">Actualizar Producto</h2>
+
+    <div class="actualizar-contenido">
+
+        <div class="col-imagen">
+            <div class="imagen-preview">
+                <img *ngIf="imagenPreview" [src]="imagenPreview" alt="preview">
+                <img *ngIf="!imagenPreview && producto.imagen" [src]="'http://localhost:3000/img/' + producto.imagen" [alt]="producto.nombre">
+                <span *ngIf="!imagenPreview && !producto.imagen">Imagen del Producto</span>
+            </div>
+            <input type="file" class="input-file" id="imagen" (change)="onImageChange($event)" accept="image/jpeg">
+            <label class="btn-imagen" for="imagen">Cambiar Imagen(jpg)</label>
+        </div>
+
+        <div class="col-campos">
+            <div class="campos-grid">
+                <input [(ngModel)]="producto.nombre" class="input-rt" placeholder="Nombre del Producto" name="nombre">
+                <input [(ngModel)]="producto.stock" class="input-rt" placeholder="Stock del Producto" name="stock" type="number" min="0" step="1">
+                <input [(ngModel)]="producto.categoria" class="input-rt" placeholder="Categoría del Producto" name="categoria">
+                <textarea [(ngModel)]="producto.descripcion" class="input-rt" placeholder="Descripción del Producto" name="descripcion"></textarea>
+                <input [(ngModel)]="producto.marca" class="input-rt" placeholder="Marca del Producto" name="marca">
+                <div></div>
+                <input [(ngModel)]="producto.precio" class="input-rt" placeholder="Precio del Producto" name="precio" type="number" min="0" step="0.01">
+                <select name="disponibilidad" [(ngModel)]="producto.disponibilidad" class="input-rt">
+                    <option value="disponible">Disponible</option>
+                    <option value="no disponible">No Disponible</option>
+                </select>
+            </div>
+            <div class="botones">
+                <button class="btn-eliminar" (click)="eliminar()">ELIMINAR PRODUCTO</button>
+                <button class="btn-descartar" (click)="descartar()">DESCARTAR</button>
+                <button class="btn-confirmar" (click)="actualizar()">CONFIRMAR CAMBIOS</button>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-confirmar" *ngIf="mostrarConfirmacion">
+        <div class="confirmar-card">
+            <h3>¿Seguro que quieres eliminarlo?</h3>
+            <p>Ingresa tu usuario para confirmar</p>
+            <input type="text" [(ngModel)]="passwordAdmin" name="passwordAdmin"placeholder="Admin/admin/ADMIN"class="input-rt">
+            <p *ngIf="errorAdmin" class="error-msg">{{ errorAdmin }}</p>
+            <div class="confirmar-botones">
+            <button class="btn-descartar" (click)="cancelarEliminar()">Cancelar</button>
+            <button class="btn-eliminar" (click)="confirmarEliminar()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-alert
+  *ngIf="mostrarAlert"
+  [ngClass]="{'alerta-exitosa': tipoAlert === 'success', 'alerta-error': tipoAlert === 'error'}"
+  [tipo]="tipoAlert"
+  [mensaje]="mensajeAlert"
+  (cerrar)="mostrarAlert = false">
+</app-alert>

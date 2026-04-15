@@ -1,0 +1,135 @@
+.detalle-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  padding: 40px;
+  gap: 60px;
+  align-items: center;
+}
+
+.detalle-imagen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detalle-imagen img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 8px 32px rgba(158, 255, 31, 0.15);
+}
+
+.detalle-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detalle-nombre {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.detalle-marca {
+  font-size: 1.2rem;
+  color: #9eff1f;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.detalle-categoria {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.detalle-precio {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.detalle-descripcion {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.detalle-disponibilidad {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: fit-content;
+}
+
+.disponible {
+  background-color: rgba(158, 255, 31, 0.15);
+  color: #9eff1f;
+  border: 1px solid #9eff1f;
+}
+
+.no-disponible {
+  background-color: rgba(255, 50, 50, 0.15);
+  color: #ff4444;
+  border: 1px solid #ff4444;
+}
+
+.detalle-botones {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.detalle-botones button {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.detalle-botones button:first-child {
+  background-color: #9eff1f;
+  color: #000;
+}
+
+.detalle-botones button:first-child:hover {
+  background-color: #fff;
+}
+
+.detalle-botones button:last-child {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.detalle-botones button:last-child:hover {
+  border-color: #9eff1f;
+  color: #9eff1f;
+}
+
+.detalle-botones button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

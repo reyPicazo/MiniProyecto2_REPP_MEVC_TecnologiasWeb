@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+
+<div class="fondo d-flex justify-content-center align-items-center">
+    <h1 class="slogan">EL RINCON DONDE <br> LOS SUEÑOS SE <br> HACEN REALIDAD</h1>
+
+</div>
+
+<div class="heroProductos">
+  <app-admin-card
+    *ngFor="let producto of productos"
+    [producto]="producto"
+    (alActualizar)="onActualizar($event)">
+  </app-admin-card>
+</div>
+
+<app-alert
+  *ngIf="mostrarAlert"
+  [ngClass]="{'alerta-exitosa': tipoAlert === 'success', 'alerta-error': tipoAlert === 'error'}"
+  [tipo]="tipoAlert"
+  [mensaje]="mensajeAlert"
+  (cerrar)="mostrarAlert = false">
+</app-alert>

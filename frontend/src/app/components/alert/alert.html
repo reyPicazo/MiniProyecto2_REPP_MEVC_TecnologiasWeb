@@ -1,0 +1,6 @@
+<div class="alert-overlay">
+  <div class="alert-container" [class.success]="tipo === 'success'" [class.error]="tipo === 'error'">
+    <span class="alert-mensaje">{{ mensaje }}</span>
+    <button class="alert-cerrar" (click)="cerrar.emit()">Aceptar</button>
+  </div>
+</div>
