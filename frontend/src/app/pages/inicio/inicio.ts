@@ -5,11 +5,12 @@ import {Productos}from '../../services/productos';
 import { ProductoCard } from "../../components/producto-card/producto-card";
 import { CommonModule } from '@angular/common';
 import { Alert } from '../../components/alert/alert';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [Navbar, ProductoCard, NgFor, CommonModule, Alert],
+  imports: [Navbar, ProductoCard, NgFor, CommonModule, Alert, Footer],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })

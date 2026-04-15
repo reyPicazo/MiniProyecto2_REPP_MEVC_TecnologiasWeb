@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Alert } from '../../components/alert/alert';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-actualizar-producto',
   standalone:true,
-  imports: [Navbar, CurrencyPipe, NgFor, NgIf, NgClass, NgStyle, FormsModule, Alert],
+  imports: [Navbar, CurrencyPipe, NgFor, NgIf, NgClass, NgStyle, FormsModule, Alert, Footer],
   templateUrl: './actualizar-producto.html',
   styleUrl: './actualizar-producto.css',
 })

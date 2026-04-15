@@ -5,11 +5,12 @@ import { Navbar } from '../../components/navbar/navbar';
 import { Producto } from '../../models/producto';
 import { DecimalPipe, NgIf, NgClass, NgStyle } from '@angular/common';   
 import { Alert } from '../../components/alert/alert';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-producto-detalle',
   standalone:true,
-  imports: [Navbar, DecimalPipe, NgIf, NgClass, NgStyle, Alert],
+  imports: [Navbar, DecimalPipe, NgIf, NgClass, NgStyle, Alert, Footer],
   templateUrl: './producto-detalle.html',
   styleUrl: './producto-detalle.css',
 })

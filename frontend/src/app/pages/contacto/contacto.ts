@@ -4,10 +4,11 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 import { Mensajes } from '../../services/mensajes';
 import { Alert } from '../../components/alert/alert';
 import { NgIf, NgClass, NgStyle } from '@angular/common';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-contacto',
-  imports: [Navbar, ReactiveFormsModule, Alert, NgIf, NgClass, NgStyle],
+  imports: [Navbar, ReactiveFormsModule, Alert, NgIf, NgClass, NgStyle, Footer],
   templateUrl: './contacto.html',
   styleUrl: './contacto.css',
 })
