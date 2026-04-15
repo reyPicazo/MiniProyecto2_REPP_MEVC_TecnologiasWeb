@@ -4,11 +4,12 @@ import { Navbar } from '../../components/navbar/navbar';
 import { CurrencyPipe, NgFor, NgIf, NgClass, NgStyle } from '@angular/common';
 import { ModalCompra } from '../../components/modal-compra/modal-compra';
 import { Alert } from "../../components/alert/alert";
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [Navbar, NgIf, NgFor, CurrencyPipe, ModalCompra, Alert, NgClass, NgStyle],
+  imports: [Navbar, NgIf, NgFor, CurrencyPipe, ModalCompra, Alert, NgClass, NgStyle, Footer],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })

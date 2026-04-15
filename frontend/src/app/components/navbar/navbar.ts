@@ -89,7 +89,10 @@ export class Navbar implements OnInit {
   }
   
   get esAdmin(): boolean {
-    return this.Usuario?.nombre === 'admin';
+    if(this.Usuario?.nombre==="admin" || this.Usuario?.nombre==="Admin" || this.Usuario?.nombre==="ADMIN"){
+      return true;
+    }
+    return false;
   }
 
   

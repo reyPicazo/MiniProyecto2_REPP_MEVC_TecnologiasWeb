@@ -6,11 +6,12 @@ import { Admin } from '../../models/admin';
 import { CommonModule } from '@angular/common';
 import { AdminCard } from '../../components/admin-card/admin-card';
 import { Alert } from '../../components/alert/alert';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-inicio-admin',
   standalone:true,
-  imports: [Navbar, CommonModule, AdminCard, NgFor, Alert],
+  imports: [Navbar, CommonModule, AdminCard, NgFor, Alert, Footer],
   templateUrl: './inicio-admin.html',
   styleUrl: './inicio-admin.css',
 })
