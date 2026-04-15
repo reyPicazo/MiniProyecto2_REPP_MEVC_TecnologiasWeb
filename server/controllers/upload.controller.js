@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const db = require('../db/db');
+const db = require("../server");
 
 
 exports.renameImageToProductId = async (oldFilename, productId) => {

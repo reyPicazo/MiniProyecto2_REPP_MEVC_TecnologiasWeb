@@ -1,10 +1,11 @@
-const {getConnection}=require("../db/db");
 const {renameImageToProductId}=require("./upload.controller")
 const path=require('path');
+const fs=require('fs');
+const db = require("../server");
+
 
 const getProductos=async(req, res)=>{
     try {
-        const db = getConnection();
         const [rows] = await db.query('SELECT * FROM productos');
         const productos = rows.map(p => ({
           ...p,
@@ -20,7 +21,6 @@ const getProductos=async(req, res)=>{
 
 const getById = async (req, res) => {
   try {
-    const db = getConnection();
     const { id } = req.params;
     const [rows] = await db.query('SELECT * FROM productos WHERE id = ?', [id]);
 
@@ -49,7 +49,6 @@ const postProducto=async(req, res)=>{
 
     const disponibilidadBool=disponibilidad==='true' || disponibilidad === 'true' || disponibilidad ==='disponible' ? 1:0;
 
-    const db= await getConnection();
     const result= await db.query(
       'INSERT INTO productos (nombre, categoria, marca, precio, stock, imagen, descripcion, disponibilidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       [nombre, categoria, marca, precio, stock, imagenFile.filename, descripcion, disponibilidadBool]
@@ -73,17 +72,15 @@ const postProducto=async(req, res)=>{
 }
 
 const deleteProducto=async(req, res)=>{
-  let conn;
   try{
-    conn =await getConnection();
     const {id}=req.params;
 
-    const [product]= await conn.query('SELECT imagen FROM productos WHERE id = ?', [id]);
+    const [product]= await db.query('SELECT imagen FROM productos WHERE id = ?', [id]);
 
     if(!product){
       return res.status(404).json({ mensaje: 'Producto no encontrado' });
     }
-    const result=await conn.query('DELETE FROM productos WHERE id = ?', [id]);
+    const result=await db.query('DELETE FROM productos WHERE id = ?', [id]);
     const filas=result.affectedRows;
 
     if(filas===0){
@@ -110,9 +107,7 @@ const deleteProducto=async(req, res)=>{
 }
 
 const updateProduct=async(req, res)=>{
-  let conn;
   try{
-    conn =await getConnection();
 
     const {id}= req.params;
     const{nombre, categoria, marca, precio, stock, descripcion, disponibilidad} = req.body;
@@ -122,7 +117,7 @@ const updateProduct=async(req, res)=>{
 
     }
 
-    const [oldProduct]=await conn.query('SELECT imagen FROM productos WHERE id = ?', [id]);
+    const [oldProduct]=await db.query('SELECT imagen FROM productos WHERE id = ?', [id]);
     if(!oldProduct){
       return res.status(400).json({ mensaje: 'Producto no encontrado' });
     }
@@ -137,7 +132,7 @@ const updateProduct=async(req, res)=>{
     
     const disponibilidadBool = disponibilidad === 'true' || disponibilidad === true ? 1 : 0;
 
-    const result=await conn.query(
+    const result=await db.query(
       'UPDATE productos SET nombre = ?, categoria = ?, marca = ?, precio = ?, stock = ?, imagen = ?, descripcion = ?, disponibilidad = ? WHERE id = ?',
       [nombre, categoria, marca, precio, stock, finalImageName, descripcion, disponibilidadBool, id]
     );

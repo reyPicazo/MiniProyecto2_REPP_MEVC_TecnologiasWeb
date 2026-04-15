@@ -1,14 +1,12 @@
-const {getConnection}=require("../db/db");
+const db = require("../server");
 
 const postMensajes=async (req, res) => {
-    let conn;
     try{
         const{nombre, email, asunto, mensaje}=req.body;
         if(!nombre || !email || !asunto || !mensaje){
             return res.status(400).json({error: "Todos los campos son obligatorios"});
         }
-        conn=await getConnection();
-        const result=await conn.query(
+        const result=await db.query(
             'INSERT INTO mensajes(nombre, correo, asunto, mensaje) VALUES (?, ?, ?, ?)',
             [nombre, email, asunto, mensaje]
         );
@@ -18,7 +16,7 @@ const postMensajes=async (req, res) => {
         console.error("Error al enviar el mensaje:", error);
         return res.status(500).json({error: "Error interno del servidor"});
     }finally{
-        
+         
     }
 }
 

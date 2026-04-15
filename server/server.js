@@ -1,26 +1,42 @@
+require('dotenv').config();
 const express=require('express');
 const cors=require('cors');
-//const mysql=require('mysql2');
-require('dotenv').config();
+const mysql=require('mysql2/promise');
+
 
 const app =express();
 const PORT=process.env.PORT || 3000;
 
-// Configuración de la conexión a la base de datos
-/*const db = mysql.createConnection({
-    host: process.env.MYSQLHOST,
-    user: process.env.MYSQLUSER,
-    password: process.env.MYSQLPASSWORD,
-    database: process.env.MYSQLDATABASE
-});*/
+const db = mysql.createPool(process.env.DATABASE_URL);
 
+db.getConnection((err, connection) => {
+    if (err) {
+        console.error('Error al conectar con Railway:', err);
+    } else {
+        console.log('Conectado exitosamente a la base de datos de Railway');
+        connection.release();
+    }
+});
+
+module.exports = db;
+
+app.use(cors({
+    origin:'*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-user']
+}));
+
+//Usamos este para las conexines locales en caso de que asi se haya implementado
+/*
 app.use(cors({
     origin:[
         'http://localhost:4200'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-user']
-}));
+}));*/
+
+
 app.use(express.json());
 
 const path = require("path");
@@ -47,3 +63,5 @@ app.use("/mensajes", mensajesRoute);
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Servidor escuchando en el puerto ${PORT}.`);
 });
+
+
